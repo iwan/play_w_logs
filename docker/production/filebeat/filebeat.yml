@@ -14,10 +14,10 @@ processors:
 - decode_json_fields:
     fields: ["log", "message"]
     target: ""
-    # overwrite existing target elasticsearch fields while decoding json fields    
+    # overwrite existing target elasticsearch fields while decoding json fields
     overwrite_keys: true
-- add_docker_metadata:
-    host: "unix:///var/run/docker.sock"
+# - add_docker_metadata:
+#     host: "unix:///var/run/docker.sock"
 
 filebeat.config.modules:
   path: ${path.config}/modules.d/*.yml
