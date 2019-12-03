@@ -11,6 +11,7 @@ services:
     volumes:
       - gems:/gems
       - ./storage:/storage
+      - lograge:/log
 
   nginx:
     build:
@@ -30,9 +31,10 @@ services:
       dockerfile: Dockerfile
     volumes:
       # needed to access all docker logs (read only) :
-     - "/var/lib/docker/containers:/usr/share/dockerlogs/data:ro"
+     # - "/var/lib/docker/containers:/usr/share/dockerlogs/data:ro"
       # needed to access additional informations about containers
-     - "/var/run/docker.sock:/var/run/docker.sock"
+     # - "/var/run/docker.sock:/var/run/docker.sock"
+     - lograge:/usr/share/dockerlogs/data:ro
     links:
        - logstash
 
@@ -78,6 +80,7 @@ services:
 volumes:
   gems: {}
   storage: {}
+  lograge: {}
 
 # docker-compose up -d
 # docker-compose down
